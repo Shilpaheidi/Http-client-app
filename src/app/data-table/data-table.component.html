@@ -1,0 +1,26 @@
+<div>
+    <input type="text" [(ngModel)]="searchItems" (input)="filterData()" placeholder="Search...">
+    <table>
+      <thead>
+        <tr>
+          <th>userId</th>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Body</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredData | slice:(currentPageNumber-1)*itemsPerPage:currentPageNumber*itemsPerPage">
+          <td>{{ item.userId }}</td>
+          <td>{{ item.id }}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.body }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button (click)="onPageChange(currentPageNumber-1)" [disabled]="currentPageNumber === 1">Previous</button>
+      <span>{{ currentPageNumber }}</span>
+      <button (click)="onPageChange(currentPageNumber+1)" [disabled]="currentPageNumber*itemsPerPage >= filteredData.length">Next</button>
+    </div>
+  </div>currentPageNumber
